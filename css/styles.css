@@ -1,0 +1,153 @@
+/* =========================
+   RESET BÁSICO
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================
+   INVESTIGACIÓN HSL
+========================= */
+
+/*
+HSL significa:
+
+Hue (tono):
+Es el tipo de color. Va de 0 a 360.
+Ejemplo:
+0 = rojo
+120 = verde
+210 = azul
+
+Saturation (saturación):
+Es la intensidad del color.
+0% = gris (sin color)
+100% = color fuerte
+
+Lightness (luminosidad):
+Qué tan claro u oscuro es el color.
+0% = negro
+50% = color normal
+100% = blanco
+
+¿Por qué HSL es más útil que HEX o RGB?
+
+Porque permite modificar fácilmente los colores.
+Por ejemplo, puedes usar el mismo tono (Hue)
+y solo cambiar la luminosidad para crear variaciones
+más claras o más oscuras sin cambiar el color base.
+
+Esto hace más fácil crear paletas de colores consistentes.
+
+Ejemplo práctico:
+
+Si tengo un color azul base:
+hsl(210, 70%, 50%)
+
+Puedo crear variaciones:
+hsl(210, 70%, 70%) → más claro
+hsl(210, 70%, 30%) → más oscuro
+
+Esto es útil en:
+- efectos hover
+- botones
+- sombras
+- diseños consistentes
+*/
+
+:root {
+  /* color principal */
+  --primary: hsl(210, 70%, 50%);
+
+  /* variaciones (misma hue = 210, cambia lightness) */
+  --primary-light: hsl(210, 70%, 70%);
+  --primary-dark: hsl(210, 70%, 30%);
+
+  /* colores generales */
+  --background: hsl(210, 30%, 95%);
+  --text: hsl(210, 20%, 20%);
+}
+/* =========================
+   ESTILOS BASE
+========================= */
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  background: var(--background);
+  color: var(--text);
+}
+/* =========================
+   HEADER (FLEXBOX)
+========================= */
+
+header {
+  display: flex;
+  flex-direction: column; /* uno debajo del otro */
+  justify-content: center;
+  align-items: center;
+  background: var(--primary);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+}
+/* =========================
+   GALERÍA (GRID)
+========================= */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* 👈 más compacto tipo Instagram */
+  padding: 10px;
+}
+/* =========================
+   TARJETAS
+========================= */
+
+.card {
+  aspect-ratio: 1 / 1; /* 👈 cuadrado perfecto */
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 👈 llena todo y recorta */
+  transition: transform 0.4s ease;
+}
+/* =========================
+   HOVER
+========================= */
+
+.card:hover img {
+  transform: scale(1.1);
+}
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Móvil */
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+.card img {
+  width: 100%;
+  height: auto;
+}
